@@ -1,0 +1,138 @@
+package Analizador;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+    
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+}
+:};
+
+terminal Linea, Comillas,T_byte, T_int, T_char, T_long, T_float, T_double, Cadena, 
+    If, Else, Void, Printf, Do, While, For, Igual, Suma, Resta, Multiplicacion, Division, 
+    Op_logico, Op_relacional, Op_atribucion, Op_incremento, Op_booleano, Parent_a, Parent_c,
+    Llave_a, Llave_c, Corchete_a, Corchete_c, Main, P_coma, Punto, Identificador, Numero, ERROR;
+non terminal INICIO, SENTENCIA, DECLARACION, DECLARACION_FOR, IF, IF_ELSE,
+    WHILE, DO_WHILE, FOR, SENTENCIA_BOOLEANA, SENTENCIA_FOR, PRINTF, SENTENCIA_PRINTF;
+
+start with INICIO;
+
+INICIO ::= 
+    T_int Main Parent_a Parent_c Llave_a SENTENCIA Llave_c |
+    Void Main Parent_a Parent_c Llave_a SENTENCIA Llave_c |
+    Main Parent_a Parent_c Llave_a SENTENCIA Llave_c
+;
+SENTENCIA ::= 
+    SENTENCIA DECLARACION |
+    DECLARACION |
+    SENTENCIA IF | 
+    IF |
+    SENTENCIA IF_ELSE |
+    IF_ELSE |
+    SENTENCIA WHILE |
+    WHILE |
+    SENTENCIA DO_WHILE
+    DO_WHILE |
+    SENTENCIA FOR |
+    FOR |
+    SENTENCIA PRINTF |
+    PRINTF
+;
+DECLARACION ::= 
+    T_byte Identificador P_coma | 
+    T_byte Identificador Op_atribucion Numero P_coma |
+    T_byte Identificador Op_atribucion Numero Punto Numero P_coma |
+    T_byte Identificador Igual Numero P_coma |
+    T_byte Identificador Igual Numero Punto Numero P_coma |
+    T_byte Identificador Op_incremento P_coma | 
+    T_byte Op_incremento Identificador P_coma |
+    T_int Identificador P_coma | 
+    T_int Identificador Op_atribucion Numero P_coma |
+    T_int Identificador Op_atribucion Numero Punto Numero P_coma |
+    T_int Identificador Igual Numero P_coma |
+    T_int Identificador Igual Numero Punto Numero P_coma |
+    T_int Identificador Op_incremento P_coma | 
+    T_int Op_incremento Identificador P_coma |
+    T_char Identificador P_coma | 
+    T_char Identificador Op_atribucion Numero P_coma |
+    T_char Identificador Op_atribucion Numero Punto Numero P_coma |
+    T_char Identificador Igual Numero P_coma |
+    T_char Identificador Igual Numero Punto Numero P_coma |
+    T_char Identificador Op_incremento P_coma | 
+    T_char Op_incremento Identificador P_coma |
+    T_long Identificador P_coma | 
+    T_long Identificador Op_atribucion Numero P_coma |
+    T_long Identificador Op_atribucion Numero Punto Numero P_coma |
+    T_long Identificador Igual Numero P_coma |
+    T_long Identificador Igual Numero Punto Numero P_coma |
+    T_long Identificador Op_incremento P_coma | 
+    T_long Op_incremento Identificador P_coma |
+    T_float Identificador P_coma | 
+    T_float Identificador Op_atribucion Numero P_coma |
+    T_float Identificador Op_atribucion Numero Punto Numero P_coma |
+    T_float Identificador Igual Numero P_coma |
+    T_float Identificador Igual Numero Punto Numero P_coma |
+    T_float Identificador Op_incremento P_coma | 
+    T_float Op_incremento Identificador P_coma |
+    T_double Identificador P_coma | 
+    T_double Identificador Op_atribucion Numero P_coma |
+    T_double Identificador Op_atribucion Numero Punto Numero P_coma |
+    T_double Identificador Igual Numero P_coma |
+    T_double Identificador Igual Numero Punto Numero P_coma |
+    T_double Identificador Op_incremento P_coma | 
+    T_double Op_incremento Identificador P_coma |
+    /*T_dato Identificador P_coma | 
+    T_dato Identificador Op_atribucion Numero P_coma |
+    T_dato Identificador Op_atribucion Numero Punto Numero P_coma |
+    T_dato Identificador Igual Numero P_coma |
+    T_dato Identificador Igual Numero Punto Numero P_coma |
+    T_dato Identificador Op_incremento P_coma | 
+    T_dato Op_incremento Identificador P_coma | */
+    Cadena Identificador Op_atribucion Comillas Comillas P_coma |
+    Cadena Identificador Igual Comillas Comillas P_coma |
+    Cadena Identificador Op_atribucion Comillas Identificador Comillas P_coma |
+    Cadena Identificador Igual Comillas Identificador Comillas P_coma
+;
+IF ::= If Parent_a SENTENCIA_BOOLEANA Parent_c Llave_a SENTENCIA Llave_c
+;
+SENTENCIA_BOOLEANA ::= 
+    Op_booleano | 
+    Identificador Op_relacional Op_booleano |
+    Identificador Op_relacional Numero |
+    Identificador Op_relacional Identificador |
+    Identificador Op_relacional Comillas Comillas |
+    Identificador Op_relacional Comillas Identificador Comillas
+;
+IF_ELSE ::= If Parent_a SENTENCIA_BOOLEANA Parent_c Llave_a SENTENCIA Llave_c Else Llave_a SENTENCIA Llave_c
+;
+WHILE ::= While Parent_a SENTENCIA_BOOLEANA Parent_c Llave_a SENTENCIA Llave_c
+;
+DO_WHILE ::= Do Llave_a SENTENCIA Llave_c While Parent_a SENTENCIA_BOOLEANA Parent_c P_coma
+;
+FOR ::= For Parent_a SENTENCIA_FOR Parent_c Llave_a SENTENCIA Llave_c
+;
+SENTENCIA_FOR ::=
+    /*T_dato*/T_int Identificador Igual Numero P_coma SENTENCIA_BOOLEANA P_coma DECLARACION_FOR |
+    Identificador Igual Numero P_coma SENTENCIA_BOOLEANA P_coma DECLARACION_FOR
+;
+DECLARACION_FOR ::= 
+    Identificador Op_atribucion Numero |
+    Identificador Op_incremento | 
+    Op_incremento Identificador
+;
+
+PRINTF ::= 
+    Printf Parent_a Comillas Comillas Parent_c P_coma | 
+    Printf Parent_a Comillas SENTENCIA_PRINTF Comillas Parent_c P_coma
+;
+
+SENTENCIA_PRINTF ::= 
+    Identificador
+;

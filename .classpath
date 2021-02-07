@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="D:/7 semester/Ciencias III/Analizador léxico/java_cup.jar"/>
+	<classpathentry kind="lib" path="D:/7 semester/Ciencias III/Analizador léxico/java-cup-11a.jar"/>
+	<classpathentry kind="lib" path="D:/7 semester/Ciencias III/Analizador léxico/JFlex.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
