@@ -253,8 +253,8 @@ public class FrmAnalizador extends JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                             .addComponent(btnBorrarSin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -291,6 +291,9 @@ public class FrmAnalizador extends JFrame {
                     break;
                 case Comillas:
                     resultado += "  <Comillas>\t\t" + lexicos.lexemas + "\n";
+                    break;
+                case Back:
+                    resultado += "  <Backslash>\t\t" + lexicos.lexemas + "\n";
                     break;
                 case Comilla_s:
                     resultado += "  <Comilla simple>\t\t" + lexicos.lexemas + "\n";

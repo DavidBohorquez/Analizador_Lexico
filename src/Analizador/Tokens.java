@@ -3,6 +3,7 @@ package Analizador;
 public enum Tokens {
     Linea,
     Comillas,
+    Back,
     Comilla_s,
     //T_dato,
     T_byte,

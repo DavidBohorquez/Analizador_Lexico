@@ -15,7 +15,7 @@ parser code
 }
 :};
 
-terminal Linea, Comillas, Comilla_s, T_byte, T_int, T_char, T_long, T_float, T_double, Cadena, T_bool,
+terminal Linea, Comillas, Back, Comilla_s, T_byte, T_int, T_char, T_long, T_float, T_double, Cadena, T_bool,
     If, Else, Void, Switch, Case, Break, Default, Include, IOStream, Using, NameSpace, STD, Cin, Cout, RETURN,  
     SYSTEM, Printf, Scanf, Do, While, For, Igual, Suma, Resta, Multiplicacion, Division, /*Op_logico, Op_relacional,*/ 
     Op_rel_mayor, Op_rel_menor, Op_rel_igual, Op_rel_diferente, Op_rel_mayor_igual,  
@@ -51,6 +51,10 @@ INICIO ::=
     Comillas Parent_c P_coma RETURN Identificador P_coma Llave_c |
     
     Include Op_rel_menor Identificador Punto Identificador Op_rel_mayor Include Op_rel_menor Identificador Punto Identificador Op_rel_mayor 
+    Using NameSpace STD P_coma T_int Main Parent_a Parent_c Llave_a SENTENCIA RETURN Numero P_coma Llave_c |
+
+    Include Op_rel_menor IOStream Op_rel_mayor 
+    Include Op_rel_menor Identificador Op_rel_mayor 
     Using NameSpace STD P_coma T_int Main Parent_a Parent_c Llave_a SENTENCIA RETURN Numero P_coma Llave_c |
     
     T_int Main Parent_a Parent_c Llave_a SENTENCIA RETURN Numero P_coma Llave_c |
@@ -130,6 +134,7 @@ DECLARACION ::=
     T_char Identificador Igual Comilla_s Identificador Comilla_s P_coma |
     T_char Identificador Op_incremento P_coma | 
     T_char Op_incremento Identificador P_coma |
+    Identificador Igual Comilla_s Identificador Comilla_s P_coma |
 
     T_long Identificador P_coma | 
     //T_long Identificador Op_atribucion Numero P_coma |
@@ -321,7 +326,8 @@ PRINTF ::=
 SENTENCIA_PRINTF ::= 
     Identificador |
     Comillas Modulo Identificador Comillas Coma Identificador Punto Identificador Parent_a Parent_c |
-    Comillas Modulo Identificador Comillas Coma Identificador
+    Comillas Modulo Identificador Comillas Coma Identificador |
+    Comillas Modulo Identificador Back Identificador Comillas Coma Identificador
 ;
 
 SCANF ::= 
@@ -368,5 +374,9 @@ COUT ::=
 SENTENCIA_COUT ::= 
     Identificador |
     Comillas Identificador Comillas |
-    Comillas Identificador Identificador Comillas
+    Comillas Identificador Identificador Comillas |
+    Comillas Identificador Identificador Identificador Identificador Dos_puntos Comillas |
+    Comillas Identificador Identificador Identificador Comillas |
+    Comillas Back Identificador Comillas |
+    Comillas Numero Punto Identificador Back Identificador Comillas
 ;

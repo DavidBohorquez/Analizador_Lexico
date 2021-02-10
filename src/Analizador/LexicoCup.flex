@@ -25,8 +25,14 @@ espacio=[ \t\r\n]+
 /* Comentarios */
 ( "//"(.)* ) {/*Ignore*/}
 
+/* Salto de linea */
+( "\n" ) {return new Symbol(sym.Linea, yychar, yyline, yytext());}
+
 /* Comillas */
 ( "\"" ) {return new Symbol(sym.Comillas, yychar, yyline, yytext());}
+
+/* Backslash */
+( "\\" ) {return new Symbol(sym.Back, yychar, yyline, yytext());}
 
 /* Comilla Simple */
 ( "'" ) {return new Symbol(sym.Comilla_s, yychar, yyline, yytext());}
