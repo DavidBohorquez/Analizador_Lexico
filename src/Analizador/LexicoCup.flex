@@ -229,6 +229,9 @@ espacio=[ \t\r\n]+
 /* Coma */
 ( "," ) {return new Symbol(sym.Coma, yychar, yyline, yytext());}
 
+/* Modulo */
+( "%" ) {return new Symbol(sym.Modulo, yychar, yyline, yytext());}
+
 /* Identificador */
 {L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());}
 

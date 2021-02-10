@@ -73,6 +73,7 @@ public enum Tokens {
     Punto,
     Dos_puntos,
     Coma,
+    Modulo,
     Identificador,
     Numero,
     ERROR

@@ -229,6 +229,9 @@ espacio=[ \t\r]+
 /* Coma */
 ( "," ) {lexemas=yytext(); return Coma;}
 
+/* Modulo */
+( "%" ) {lexemas=yytext(); return Modulo;}
+
 /* Identificador */
 {L}({L}|{D})* {lexemas=yytext(); return Identificador;}
 

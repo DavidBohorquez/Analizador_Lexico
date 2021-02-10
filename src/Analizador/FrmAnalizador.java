@@ -391,6 +391,9 @@ public class FrmAnalizador extends javax.swing.JFrame {
                 case Coma:
                     resultado += "  <Coma>\t\t" + lexicos.lexemas + "\n";
                     break;
+                case Modulo:
+                    resultado += "  <Modulo>\t\t" + lexicos.lexemas + "\n";
+                    break;
                 case Identificador:
                     resultado += "  <Identificador>\t" + lexicos.lexemas + "\n";
                     break;
