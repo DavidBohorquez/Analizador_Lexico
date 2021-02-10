@@ -142,6 +142,9 @@ espacio=[ \t\r\n]+
 /* Operadores logicos */
 //( "&&" | "||" | "!" | "&" | "|" ) {return new Symbol(sym.Op_logico, yychar, yyline, yytext());}
 
+/* Op_Nand */
+( "&" ) {return new Symbol(sym.Op_Nand, yychar, yyline, yytext());}
+
 /*Operadores Relacionales */
 //( ">" | "<" | "==" | "!=" | ">=" | "<=" | "<<" | ">>" ) {return new Symbol(sym.Op_relacional, yychar, yyline, yytext());}
 

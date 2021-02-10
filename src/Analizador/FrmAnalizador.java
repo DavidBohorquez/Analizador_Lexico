@@ -296,7 +296,7 @@ public class FrmAnalizador extends JFrame {
                     resultado += "  <Backslash>\t\t" + lexicos.lexemas + "\n";
                     break;
                 case Comilla_s:
-                    resultado += "  <Comilla simple>\t\t" + lexicos.lexemas + "\n";
+                    resultado += "  <Comilla simple>\t" + lexicos.lexemas + "\n";
                     break;
                 case Cadena:
                     resultado += "  <Tipo de dato>\t" + lexicos.lexemas + "\n";
@@ -458,10 +458,10 @@ public class FrmAnalizador extends JFrame {
                     resultado += "  <Operador booleano>\t" + lexicos.lexemas + "\n";
                     break;*/
                 case Op_bool_true:
-                    resultado += "  <Operador booleano true>\t" + lexicos.lexemas + "\n";
+                    resultado += "  <Operador booleano true>" + lexicos.lexemas + "\n";
                     break;
                 case Op_bool_false:
-                    resultado += "  <Operador booleano false>\t" + lexicos.lexemas + "\n";
+                    resultado += "  <Operador booleano false>" + lexicos.lexemas + "\n";
                     break;
                 case Parentesis_a:
                     resultado += "  <Parentesis de apertura>\t" + lexicos.lexemas + "\n";
