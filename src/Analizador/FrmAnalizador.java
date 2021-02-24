@@ -6,15 +6,9 @@
 package Analizador;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.SystemColor;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.util.logging.Level;
@@ -22,11 +16,7 @@ import java.util.logging.Logger;
 import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 /**
  *
@@ -621,6 +611,11 @@ public class FrmAnalizador extends JFrame {
             String[] comando = {"correr.bat"};
             Runtime.getRuntime().exec(comando);
             System.out.println("Ejecucion del programa en el sistema operativo");
+            Boton_Intermedio.setEnabled(false);
+            Boton_Assembler.setEnabled(false);
+            Boton_Objeto.setEnabled(false);
+            Boton_Ejecutable.setEnabled(false);
+            Boton_Ejecutar.setEnabled(false);
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -705,7 +700,9 @@ public class FrmAnalizador extends JFrame {
             txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + ", Texto: \"" + sym.value + "\"");
             txtAnalizarSin.setForeground(Color.red);
         }
-        Boton_Intermedio.setEnabled(true);
+        if(txtAnalizarSin.getForeground().equals(new Color(0,255,0))){
+            Boton_Intermedio.setEnabled(true);
+        }
     }//GEN-LAST:event_btnASintacticoActionPerformed
 
     private void btnBorrarSinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarSinActionPerformed
