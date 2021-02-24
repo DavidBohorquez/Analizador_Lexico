@@ -1,3 +1,7 @@
+/*
+    Néstor David Bohorquez Galeano - 20172020083
+    Diego Alejandro Velez García -  20172020075
+*/
 package Analizador;
 
 import java_cup.runtime.Symbol;
@@ -15,17 +19,17 @@ parser code
 }
 :};
 
-terminal Linea, Comillas, Comilla_s, T_byte, T_int, T_char, T_long, T_float, T_double, Cadena, T_bool,
-    If, Else, Void, Switch, Case, Break, Default, Include, IOStream, Using, NameSpace, STD, Cin, Cout, RETURN,  
-    SYSTEM, Printf, Scanf, Do, While, For, Igual, Suma, Resta, Multiplicacion, Division, /*Op_logico, Op_relacional,*/ 
-    Op_rel_mayor, Op_rel_menor, Op_rel_igual, Op_rel_diferente, Op_rel_mayor_igual,  
-    Op_rel_menor_igual, Op_rel_izq, Op_rel_der, /*Op_atribucion,*/ Op_atr_adicion, Op_atr_sustraccion, Op_atr_mult, 
-    Op_atr_div, Op_atr_resto, Op_incremento, Op_decremento, /*Op_booleano,*/ Op_bool_true, Op_bool_false, Parent_a, Parent_c,
-    Llave_a, Llave_c, Corchete_a, Corchete_c, Main, P_coma, Punto, Dos_puntos, Coma, Modulo, Identificador, Numero, ERROR;
+terminal Linea, Comillas, Back, Comilla_s, T_byte, T_int, T_char, T_long, T_float, T_double, Cadena, T_bool,
+        If, Else, Void, Switch, Case, Break, Default, Include, IOStream, Using, NameSpace, STD, Cin, Cout, RETURN,  
+        SYSTEM, Printf, Scanf, Do, While, For, Igual, Suma, Resta, Multiplicacion, Division, /*Op_logico, Op_relacional,*/ 
+        Op_Nand, Op_rel_mayor, Op_rel_menor, Op_rel_igual, Op_rel_diferente, Op_rel_mayor_igual,  
+        Op_rel_menor_igual, Op_rel_izq, Op_rel_der, /*Op_atribucion,*/ Op_atr_adicion, Op_atr_sustraccion, Op_atr_mult, 
+        Op_atr_div, Op_atr_resto, Op_incremento, Op_decremento, /*Op_booleano,*/ Op_bool_true, Op_bool_false, Parent_a, Parent_c,
+        Llave_a, Llave_c, Corchete_a, Corchete_c, Main, P_coma, Punto, Dos_puntos, Coma, Modulo, Identificador, Numero, ERROR;
 
-non terminal INICIO, SENTENCIA, DECLARACION, DECLARACION_FOR, IF, IF_ELSE,
-    WHILE, DO_WHILE, FOR, SENTENCIA_BOOLEANA, SENTENCIA_FOR, PRINTF, SENTENCIA_PRINTF, SCANF, SENTENCIA_SCANF,
-    SWITCH, SENTENCIA_SWITCH, CIN, SENTENCIA_CIN, COUT, SENTENCIA_COUT;
+non terminal INICIO, SENTENCIA, DECLARACION, DECLARACION_FOR, IF, IF_ELSE,WHILE, DO_WHILE, FOR, 
+            SENTENCIA_BOOLEANA, SENTENCIA_FOR, PRINTF, SENTENCIA_PRINTF, SCANF, SENTENCIA_SCANF,
+            SWITCH, SENTENCIA_SWITCH, CIN, SENTENCIA_CIN, COUT, SENTENCIA_COUT;
 
 start with INICIO;
 
@@ -51,6 +55,10 @@ INICIO ::=
     Comillas Parent_c P_coma RETURN Identificador P_coma Llave_c |
     
     Include Op_rel_menor Identificador Punto Identificador Op_rel_mayor Include Op_rel_menor Identificador Punto Identificador Op_rel_mayor 
+    Using NameSpace STD P_coma T_int Main Parent_a Parent_c Llave_a SENTENCIA RETURN Numero P_coma Llave_c |
+
+    Include Op_rel_menor IOStream Op_rel_mayor 
+    Include Op_rel_menor Identificador Op_rel_mayor 
     Using NameSpace STD P_coma T_int Main Parent_a Parent_c Llave_a SENTENCIA RETURN Numero P_coma Llave_c |
     
     T_int Main Parent_a Parent_c Llave_a SENTENCIA RETURN Numero P_coma Llave_c |
@@ -119,6 +127,11 @@ DECLARACION ::=
 
     T_int Identificador Coma Identificador Coma Identificador P_coma |
 
+    Identificador Igual Identificador P_coma |
+    Identificador Op_atr_adicion Identificador P_coma |
+    Identificador Op_atr_adicion Numero P_coma |
+    Identificador Op_incremento P_coma |
+
     T_char Identificador P_coma | 
     //T_char Identificador Op_atribucion Numero P_coma |
     T_char Identificador Op_atr_adicion Comilla_s Identificador Comilla_s P_coma |
@@ -130,6 +143,7 @@ DECLARACION ::=
     T_char Identificador Igual Comilla_s Identificador Comilla_s P_coma |
     T_char Identificador Op_incremento P_coma | 
     T_char Op_incremento Identificador P_coma |
+    Identificador Igual Comilla_s Identificador Comilla_s P_coma |
 
     T_long Identificador P_coma | 
     //T_long Identificador Op_atribucion Numero P_coma |
@@ -194,6 +208,8 @@ DECLARACION ::=
     T_bool Identificador P_coma | 
     T_bool Identificador Igual Op_bool_true P_coma |
     T_bool Identificador Igual Op_bool_false P_coma |
+    Identificador Igual Op_bool_true P_coma |
+    Identificador Igual Op_bool_false P_coma |
     
     //Cadena Identificador Op_atribucion Comillas Comillas P_coma |
     Cadena Identificador Op_atr_adicion Comillas Comillas P_coma |
@@ -221,6 +237,8 @@ SENTENCIA_BOOLEANA ::=
     Op_bool_false |
 
     Identificador |
+
+    Identificador Op_rel_igual Comilla_s Identificador Comilla_s |
 
     /*Identificador Op_relacional Op_booleano |
     Identificador Op_relacional Numero |
@@ -321,16 +339,23 @@ PRINTF ::=
 SENTENCIA_PRINTF ::= 
     Identificador |
     Comillas Modulo Identificador Comillas Coma Identificador Punto Identificador Parent_a Parent_c |
-    Comillas Modulo Identificador Comillas Coma Identificador
+    Comillas Modulo Identificador Comillas Coma Identificador |
+    Comillas Modulo Identificador Back Identificador Comillas Coma Identificador |
+    Comillas Modulo Identificador Comillas Coma Comillas Identificador Identificador Identificador Dos_puntos Comillas |
+    Comillas Identificador Identificador Resta Identificador Dos_puntos Comillas |
+    Comillas Identificador Identificador Dos_puntos Modulo Identificador Back Identificador Comillas Coma Identificador |
+    Comillas Identificador Dos_puntos Modulo Identificador Back Identificador Comillas Coma Identificador
 ;
 
 SCANF ::= 
     Scanf Parent_a Comillas Comillas Parent_c P_coma | 
-    Scanf Parent_a Comillas SENTENCIA_SCANF Comillas Parent_c P_coma
+    Scanf Parent_a Comillas SENTENCIA_SCANF Comillas Parent_c P_coma |
+    Scanf Parent_a SENTENCIA_SCANF Parent_c P_coma
 ;
 
 SENTENCIA_SCANF ::= 
-    Identificador
+    Identificador |
+    Comillas Modulo Identificador Comillas Coma Op_Nand Identificador
 ;
 
 SWITCH ::=
@@ -342,7 +367,9 @@ SWITCH ::=
     Switch Parent_a Identificador Parent_c Llave_a  Default Dos_puntos P_coma Llave_c |
     Switch Parent_a Identificador Parent_c Llave_a SENTENCIA_SWITCH Default Dos_puntos P_coma Llave_c |
     Switch Parent_a Identificador Parent_c Llave_a SENTENCIA_SWITCH SENTENCIA_SWITCH Default Dos_puntos P_coma Llave_c |
-    Switch Parent_a Identificador Parent_c Llave_a SENTENCIA_SWITCH SENTENCIA_SWITCH SENTENCIA_SWITCH Default Dos_puntos P_coma Llave_c
+    Switch Parent_a Identificador Parent_c Llave_a SENTENCIA_SWITCH SENTENCIA_SWITCH SENTENCIA_SWITCH Default Dos_puntos P_coma Llave_c |
+    Switch Parent_a Identificador Parent_c Llave_a 
+    SENTENCIA_SWITCH SENTENCIA_SWITCH Default Dos_puntos SENTENCIA Llave_c
 ;
 
 SENTENCIA_SWITCH ::=
@@ -368,5 +395,10 @@ COUT ::=
 SENTENCIA_COUT ::= 
     Identificador |
     Comillas Identificador Comillas |
-    Comillas Identificador Identificador Comillas
+    Comillas Identificador Identificador Comillas |
+    Comillas Identificador Identificador Identificador Identificador Dos_puntos Comillas |
+    Comillas Identificador Identificador Identificador Comillas |
+    Comillas Back Identificador Comillas |
+    Comillas Numero Punto Identificador Back Identificador Comillas |
+    Comillas Identificador Identificador Identificador Back Identificador Comillas
 ;

@@ -25,8 +25,14 @@ espacio=[ \t\r\n]+
 /* Comentarios */
 ( "//"(.)* ) {/*Ignore*/}
 
+/* Salto de linea */
+( "\n" ) {return new Symbol(sym.Linea, yychar, yyline, yytext());}
+
 /* Comillas */
 ( "\"" ) {return new Symbol(sym.Comillas, yychar, yyline, yytext());}
+
+/* Backslash */
+( "\\" ) {return new Symbol(sym.Back, yychar, yyline, yytext());}
 
 /* Comilla Simple */
 ( "'" ) {return new Symbol(sym.Comilla_s, yychar, yyline, yytext());}
@@ -135,6 +141,9 @@ espacio=[ \t\r\n]+
 
 /* Operadores logicos */
 //( "&&" | "||" | "!" | "&" | "|" ) {return new Symbol(sym.Op_logico, yychar, yyline, yytext());}
+
+/* Op_Nand */
+( "&" ) {return new Symbol(sym.Op_Nand, yychar, yyline, yytext());}
 
 /*Operadores Relacionales */
 //( ">" | "<" | "==" | "!=" | ">=" | "<=" | "<<" | ">>" ) {return new Symbol(sym.Op_relacional, yychar, yyline, yytext());}

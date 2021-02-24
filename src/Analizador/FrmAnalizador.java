@@ -6,10 +6,15 @@
 package Analizador;
 
 import java.awt.Color;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.StringReader;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +22,8 @@ import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -45,6 +52,7 @@ public class FrmAnalizador extends JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnArchivo = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         btnALexico = new javax.swing.JButton();
         btnASintactico = new javax.swing.JButton();
         Boton_Objeto = new javax.swing.JButton();
@@ -87,11 +95,25 @@ public class FrmAnalizador extends JFrame {
                 btnArchivoActionPerformed(evt);
             }
         });
+        
+        btnGuardar.setBackground(new java.awt.Color(50, 130, 184));
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar.png"))); // NOI18N
+        btnGuardar.setToolTipText("Guardar Archivo");
+        btnGuardar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnGuardar.setBorderPainted(false);
+        btnGuardar.setContentAreaFilled(false);
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnALexico.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         btnALexico.setForeground(new java.awt.Color(255, 255, 255));
         btnALexico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
-        btnALexico.setText("Análisis Léxico");
+        btnALexico.setText("Léxico");
         btnALexico.setContentAreaFilled(false);
         btnALexico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnALexico.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +125,7 @@ public class FrmAnalizador extends JFrame {
         btnASintactico.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         btnASintactico.setForeground(new java.awt.Color(255, 255, 255));
         btnASintactico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
-        btnASintactico.setText("Analisis Sintáctico");
+        btnASintactico.setText("Sintáxis");
         btnASintactico.setContentAreaFilled(false);
         btnASintactico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnASintactico.addActionListener(new java.awt.event.ActionListener() {
@@ -113,8 +135,8 @@ public class FrmAnalizador extends JFrame {
         });
         
         Boton_Objeto.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        Boton_Objeto.setForeground(new java.awt.Color(255, 255, 255));
-        Boton_Objeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
+        Boton_Objeto.setForeground(new java.awt.Color(200, 200, 200));
+        Boton_Objeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/obj.png"))); // NOI18N
         Boton_Objeto.setText("Objeto");
         Boton_Objeto.setContentAreaFilled(false);
         Boton_Objeto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -126,8 +148,8 @@ public class FrmAnalizador extends JFrame {
         });
         
         Boton_Intermedio.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        Boton_Intermedio.setForeground(new java.awt.Color(255, 255, 255));
-        Boton_Intermedio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
+        Boton_Intermedio.setForeground(new java.awt.Color(200, 200, 200));
+        Boton_Intermedio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/inter.png"))); // NOI18N
         Boton_Intermedio.setText("Intermedio");
         Boton_Intermedio.setContentAreaFilled(false);
         Boton_Intermedio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -139,8 +161,8 @@ public class FrmAnalizador extends JFrame {
         });
         
         Boton_Assembler.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        Boton_Assembler.setForeground(new java.awt.Color(255, 255, 255));
-        Boton_Assembler.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
+        Boton_Assembler.setForeground(new java.awt.Color(200, 200, 200));
+        Boton_Assembler.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/assem.png"))); // NOI18N
         Boton_Assembler.setText("Assembler");
         Boton_Assembler.setContentAreaFilled(false);
         Boton_Assembler.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -152,9 +174,9 @@ public class FrmAnalizador extends JFrame {
         });
         
         Boton_Ejecutar.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        Boton_Ejecutar.setForeground(new java.awt.Color(255, 255, 255));
-        Boton_Ejecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
-        Boton_Ejecutar.setText("Ejecutar");
+        Boton_Ejecutar.setForeground(new java.awt.Color(200, 200, 200));
+        Boton_Ejecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ejecutar.png"))); // NOI18N
+        Boton_Ejecutar.setText("");
         Boton_Ejecutar.setContentAreaFilled(false);
         Boton_Ejecutar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Boton_Ejecutar.setEnabled(false);
@@ -165,8 +187,8 @@ public class FrmAnalizador extends JFrame {
         });
         
         Boton_Ejecutable.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        Boton_Ejecutable.setForeground(new java.awt.Color(255, 255, 255));
-        Boton_Ejecutable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
+        Boton_Ejecutable.setForeground(new java.awt.Color(200, 200, 200));
+        Boton_Ejecutable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exe.png"))); // NOI18N
         Boton_Ejecutable.setText("Ejecutable");
         Boton_Ejecutable.setContentAreaFilled(false);
         Boton_Ejecutable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -194,6 +216,8 @@ public class FrmAnalizador extends JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(btnArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Boton_Ejecutar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(btnALexico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -207,7 +231,6 @@ public class FrmAnalizador extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Boton_Ejecutable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Boton_Ejecutar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -218,13 +241,14 @@ public class FrmAnalizador extends JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(Boton_Ejecutar, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnALexico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnASintactico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Boton_Intermedio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Boton_Objeto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Boton_Assembler, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Boton_Ejecutar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Boton_Ejecutable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -265,7 +289,7 @@ public class FrmAnalizador extends JFrame {
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 3, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Sintaxis");
+        jLabel2.setText("Consola");
 
         btnBorrarSin.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnBorrarSin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/borrar.png"))); // NOI18N
@@ -597,10 +621,11 @@ public class FrmAnalizador extends JFrame {
     private void Boton_ObjetoActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             Boton_Ejecutable.setEnabled(true);
+            Boton_Ejecutable.setForeground(new java.awt.Color(255, 255, 255));
             String[] gobjeto = {"objeto.bat"};
             Runtime.getRuntime().exec(gobjeto);
             System.out.println("Ejecucion del convertidor assembler a objeto");
-            
+            txtAnalizarSin.setText(txtAnalizarSin.getText() + " \n Ejecucion del convertidor assembler a objeto");
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -611,11 +636,17 @@ public class FrmAnalizador extends JFrame {
             String[] comando = {"correr.bat"};
             Runtime.getRuntime().exec(comando);
             System.out.println("Ejecucion del programa en el sistema operativo");
+            txtAnalizarSin.setText(txtAnalizarSin.getText() + " \n Ejecucion del programa en el sistema operativo");
             Boton_Intermedio.setEnabled(false);
+            Boton_Intermedio.setForeground(new java.awt.Color(200, 200, 200));
             Boton_Assembler.setEnabled(false);
+            Boton_Assembler.setForeground(new java.awt.Color(200, 200, 200));
             Boton_Objeto.setEnabled(false);
+            Boton_Objeto.setForeground(new java.awt.Color(200, 200, 200));
             Boton_Ejecutable.setEnabled(false);
+            Boton_Ejecutable.setForeground(new java.awt.Color(200, 200, 200));
             Boton_Ejecutar.setEnabled(false);
+            Boton_Ejecutar.setForeground(new java.awt.Color(200, 200, 200));
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -624,10 +655,11 @@ public class FrmAnalizador extends JFrame {
     private void Boton_EjecutableActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             Boton_Ejecutar.setEnabled(true);
+            Boton_Ejecutar.setForeground(new java.awt.Color(255, 255, 255));
             String[] gejecutable = {"ejecutable.bat"};
             Runtime.getRuntime().exec(gejecutable);
             System.out.println("Ejecucion del generador del programa ejecutable");
-            
+            txtAnalizarSin.setText(txtAnalizarSin.getText() + " \n Ejecucion del generador del programa ejecutable");
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -636,10 +668,12 @@ public class FrmAnalizador extends JFrame {
     private void Boton_IntermedioActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             Boton_Assembler.setEnabled(true);
+            Boton_Assembler.setForeground(new java.awt.Color(255, 255, 255));
             String[] intermedio = {"intermedio.bat"};
             Runtime.getRuntime().exec(intermedio);
             System.out.println("Ejecucion del convertidor de código fuente a código intermedio");
-            
+            txtAnalizarSin.setText(txtAnalizarSin.getText()+"\n\n -----------------------------------------------------------------------------------------"
+                    + " \n Ejecucion del convertidor de código fuente a código intermedio");
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -648,10 +682,11 @@ public class FrmAnalizador extends JFrame {
     private void Boton_AssemblerActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             Boton_Objeto.setEnabled(true);
+            Boton_Objeto.setForeground(new java.awt.Color(255, 255, 255));
             String[] gassembler = {"ensamblador.bat"};
             Runtime.getRuntime().exec(gassembler);
             System.out.println("Ejecucion del convertidor de código intermedio a assembler");
-            
+            txtAnalizarSin.setText(txtAnalizarSin.getText() + " \n Ejecucion del convertidor de código intermedio a assembler");
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -665,9 +700,31 @@ public class FrmAnalizador extends JFrame {
         }
     }//GEN-LAST:event_btnALexicoActionPerformed
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnALexicoActionPerformed
+        
+        BufferedWriter bf;
+        try {
+            if(escoger!=null){
+                bf = new BufferedWriter(new FileWriter(escoger.getSelectedFile().getAbsolutePath()));
+                bf.write(Resultado.getText());
+                bf.flush();
+                bf.close();
+            } else {
+                Writer writer = null;
+
+                writer = new BufferedWriter(new OutputStreamWriter(
+                        new FileOutputStream("Codigo.txt"), "utf-8"));
+                writer.write(Resultado.getText());
+                writer.close();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FrmAnalizador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void btnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoActionPerformed
         int cont = 1;
-        JFileChooser escoger = new JFileChooser();
+        escoger = new JFileChooser();
         escoger.showOpenDialog(null);
 
         try {
@@ -694,14 +751,15 @@ public class FrmAnalizador extends JFrame {
         try {
             s.parse();
             txtAnalizarSin.setText("Analisis realizado correctamente");
-            txtAnalizarSin.setForeground(new Color(0,255,0));
+            txtAnalizarSin.setForeground(new Color(255,255,255));
         } catch (Exception ex) {
             Symbol sym = s.getS();
             txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + ", Texto: \"" + sym.value + "\"");
             txtAnalizarSin.setForeground(Color.red);
         }
-        if(txtAnalizarSin.getForeground().equals(new Color(0,255,0))){
+        if(txtAnalizarSin.getForeground().equals(new Color(255,255,255))){
             Boton_Intermedio.setEnabled(true);
+            Boton_Intermedio.setForeground(new java.awt.Color(255, 255, 255));
         }
     }//GEN-LAST:event_btnASintacticoActionPerformed
 
@@ -749,10 +807,12 @@ public class FrmAnalizador extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JFileChooser escoger;
     private javax.swing.JTextArea Resultado;
     private javax.swing.JButton btnALexico;
     private javax.swing.JButton btnASintactico;
     private javax.swing.JButton btnArchivo;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnBorrarSin;
     private javax.swing.JButton Boton_Objeto;

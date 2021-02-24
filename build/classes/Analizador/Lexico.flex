@@ -25,6 +25,9 @@ espacio=[ \t\r]+
 /* Comillas */
 ( "\"" ) {lexemas=yytext(); return Comillas;}
 
+/* Backslash */
+( "\\" ) {lexemas=yytext(); return Back;}
+
 /* Comilla Simple */
 ( "'" ) {lexemas=yytext(); return Comilla_s;}
 
