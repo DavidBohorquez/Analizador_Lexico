@@ -57,6 +57,10 @@ public class FrmAnalizador extends JFrame {
         btnArchivo = new javax.swing.JButton();
         btnALexico = new javax.swing.JButton();
         btnASintactico = new javax.swing.JButton();
+        Boton_Objeto = new javax.swing.JButton();
+        Boton_Assembler = new javax.swing.JButton();
+        Boton_Ejecutar = new javax.swing.JButton();
+        Boton_Ejecutable = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -116,6 +120,54 @@ public class FrmAnalizador extends JFrame {
                 btnASintacticoActionPerformed(evt);
             }
         });
+        
+        Boton_Objeto.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        Boton_Objeto.setForeground(new java.awt.Color(255, 255, 255));
+        Boton_Objeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
+        Boton_Objeto.setText("Obj");
+        Boton_Objeto.setContentAreaFilled(false);
+        Boton_Objeto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_Objeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_ObjetoActionPerformed(evt);
+            }
+        });
+        
+        Boton_Assembler.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        Boton_Assembler.setForeground(new java.awt.Color(255, 255, 255));
+        Boton_Assembler.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
+        Boton_Assembler.setText("assem");
+        Boton_Assembler.setContentAreaFilled(false);
+        Boton_Assembler.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_Assembler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_AssemblerActionPerformed(evt);
+            }
+        });
+        
+        Boton_Ejecutar.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        Boton_Ejecutar.setForeground(new java.awt.Color(255, 255, 255));
+        Boton_Ejecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
+        Boton_Ejecutar.setText("ejec");
+        Boton_Ejecutar.setContentAreaFilled(false);
+        Boton_Ejecutar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_Ejecutar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_EjecutarActionPerformed(evt);
+            }
+        });
+        
+        Boton_Ejecutable.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        Boton_Ejecutable.setForeground(new java.awt.Color(255, 255, 255));
+        Boton_Ejecutable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
+        Boton_Ejecutable.setText("exe");
+        Boton_Ejecutable.setContentAreaFilled(false);
+        Boton_Ejecutable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_Ejecutable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_EjecutableActionPerformed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cerrar.png"))); // NOI18N
         jButton1.setBorderPainted(false);
@@ -138,6 +190,14 @@ public class FrmAnalizador extends JFrame {
                 .addComponent(btnALexico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnASintactico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Boton_Objeto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Boton_Assembler)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Boton_Ejecutar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Boton_Ejecutable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -150,7 +210,11 @@ public class FrmAnalizador extends JFrame {
                     .addComponent(btnArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnALexico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnASintactico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnASintactico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Boton_Objeto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Boton_Assembler, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Boton_Ejecutar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Boton_Ejecutable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -296,7 +360,7 @@ public class FrmAnalizador extends JFrame {
                     resultado += "  <Backslash>\t\t" + lexicos.lexemas + "\n";
                     break;
                 case Comilla_s:
-                    resultado += "  <Comilla simple>\t" + lexicos.lexemas + "\n";
+                    resultado += "  <Comilla simple>\t\t" + lexicos.lexemas + "\n";
                     break;
                 case Cadena:
                     resultado += "  <Tipo de dato>\t" + lexicos.lexemas + "\n";
@@ -458,10 +522,10 @@ public class FrmAnalizador extends JFrame {
                     resultado += "  <Operador booleano>\t" + lexicos.lexemas + "\n";
                     break;*/
                 case Op_bool_true:
-                    resultado += "  <Operador booleano true>" + lexicos.lexemas + "\n";
+                    resultado += "  <Operador booleano true>\t" + lexicos.lexemas + "\n";
                     break;
                 case Op_bool_false:
-                    resultado += "  <Operador booleano false>" + lexicos.lexemas + "\n";
+                    resultado += "  <Operador booleano false>\t" + lexicos.lexemas + "\n";
                     break;
                 case Parentesis_a:
                     resultado += "  <Parentesis de apertura>\t" + lexicos.lexemas + "\n";
@@ -517,6 +581,60 @@ public class FrmAnalizador extends JFrame {
             }
         }
 
+    }
+    
+    private void Boton_ObjetoActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            String[] gobjeto = {"objeto.bat"};
+            Runtime.getRuntime().exec(gobjeto);
+            System.out.println("Ejecucion del convertidor assembler a objeto");
+            Boton_Ejecutable.setEnabled(true);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    private void Boton_EjecutarActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            String[] comando = {"correr.bat"};
+            Runtime.getRuntime().exec(comando);
+            System.out.println("Ejecucion del programa en el sistema operativo");
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    private void Boton_EjecutableActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            String[] gejecutable = {"ejecutable.bat"};
+            Runtime.getRuntime().exec(gejecutable);
+            System.out.println("Ejecucion del generador del programa ejecutable");
+            Boton_Ejecutar.setEnabled(true);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    private void Boton_IntermedioActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            String[] intermedio = {"intermedio.bat"};
+            Runtime.getRuntime().exec(intermedio);
+            System.out.println("Ejecucion del convertidor de código fuente a código intermedio");
+            Boton_Assembler.setEnabled(true);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    private void Boton_AssemblerActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            String[] gassembler = {"ensamblador.bat"};
+            Runtime.getRuntime().exec(gassembler);
+            System.out.println("Ejecucion del convertidor de código intermedio a assembler");
+            Boton_Objeto.setEnabled(true);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
 
     private void btnALexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnALexicoActionPerformed
@@ -614,6 +732,10 @@ public class FrmAnalizador extends JFrame {
     private javax.swing.JButton btnArchivo;
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnBorrarSin;
+    private javax.swing.JButton Boton_Objeto;
+    private javax.swing.JButton Boton_Assembler;
+    private javax.swing.JButton Boton_Ejecutar;
+    private javax.swing.JButton Boton_Ejecutable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
