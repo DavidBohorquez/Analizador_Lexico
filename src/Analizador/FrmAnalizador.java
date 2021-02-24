@@ -58,6 +58,7 @@ public class FrmAnalizador extends JFrame {
         btnALexico = new javax.swing.JButton();
         btnASintactico = new javax.swing.JButton();
         Boton_Objeto = new javax.swing.JButton();
+        Boton_Intermedio = new javax.swing.JButton();
         Boton_Assembler = new javax.swing.JButton();
         Boton_Ejecutar = new javax.swing.JButton();
         Boton_Ejecutable = new javax.swing.JButton();
@@ -124,21 +125,36 @@ public class FrmAnalizador extends JFrame {
         Boton_Objeto.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         Boton_Objeto.setForeground(new java.awt.Color(255, 255, 255));
         Boton_Objeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
-        Boton_Objeto.setText("Obj");
+        Boton_Objeto.setText("Objeto");
         Boton_Objeto.setContentAreaFilled(false);
         Boton_Objeto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_Objeto.setEnabled(false);
         Boton_Objeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Boton_ObjetoActionPerformed(evt);
             }
         });
         
+        Boton_Intermedio.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        Boton_Intermedio.setForeground(new java.awt.Color(255, 255, 255));
+        Boton_Intermedio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
+        Boton_Intermedio.setText("Intermedio");
+        Boton_Intermedio.setContentAreaFilled(false);
+        Boton_Intermedio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_Intermedio.setEnabled(false);
+        Boton_Intermedio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_IntermedioActionPerformed(evt);
+            }
+        });
+        
         Boton_Assembler.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         Boton_Assembler.setForeground(new java.awt.Color(255, 255, 255));
         Boton_Assembler.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
-        Boton_Assembler.setText("assem");
+        Boton_Assembler.setText("Assembler");
         Boton_Assembler.setContentAreaFilled(false);
         Boton_Assembler.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_Assembler.setEnabled(false);
         Boton_Assembler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Boton_AssemblerActionPerformed(evt);
@@ -148,9 +164,10 @@ public class FrmAnalizador extends JFrame {
         Boton_Ejecutar.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         Boton_Ejecutar.setForeground(new java.awt.Color(255, 255, 255));
         Boton_Ejecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
-        Boton_Ejecutar.setText("ejec");
+        Boton_Ejecutar.setText("Ejecutar");
         Boton_Ejecutar.setContentAreaFilled(false);
         Boton_Ejecutar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_Ejecutar.setEnabled(false);
         Boton_Ejecutar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Boton_EjecutarActionPerformed(evt);
@@ -160,9 +177,10 @@ public class FrmAnalizador extends JFrame {
         Boton_Ejecutable.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         Boton_Ejecutable.setForeground(new java.awt.Color(255, 255, 255));
         Boton_Ejecutable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
-        Boton_Ejecutable.setText("exe");
+        Boton_Ejecutable.setText("Ejecutable");
         Boton_Ejecutable.setContentAreaFilled(false);
         Boton_Ejecutable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_Ejecutable.setEnabled(false);
         Boton_Ejecutable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Boton_EjecutableActionPerformed(evt);
@@ -191,13 +209,15 @@ public class FrmAnalizador extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnASintactico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Boton_Objeto)
+                .addComponent(Boton_Intermedio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Boton_Assembler)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Boton_Ejecutar)
+                .addComponent(Boton_Objeto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Boton_Ejecutable)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Boton_Ejecutar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -211,6 +231,7 @@ public class FrmAnalizador extends JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnALexico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnASintactico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Boton_Intermedio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Boton_Objeto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Boton_Assembler, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Boton_Ejecutar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -585,10 +606,11 @@ public class FrmAnalizador extends JFrame {
     
     private void Boton_ObjetoActionPerformed(java.awt.event.ActionEvent evt) {
         try {
+            Boton_Ejecutable.setEnabled(true);
             String[] gobjeto = {"objeto.bat"};
             Runtime.getRuntime().exec(gobjeto);
             System.out.println("Ejecucion del convertidor assembler a objeto");
-            Boton_Ejecutable.setEnabled(true);
+            
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -606,10 +628,11 @@ public class FrmAnalizador extends JFrame {
 
     private void Boton_EjecutableActionPerformed(java.awt.event.ActionEvent evt) {
         try {
+            Boton_Ejecutar.setEnabled(true);
             String[] gejecutable = {"ejecutable.bat"};
             Runtime.getRuntime().exec(gejecutable);
             System.out.println("Ejecucion del generador del programa ejecutable");
-            Boton_Ejecutar.setEnabled(true);
+            
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -617,10 +640,11 @@ public class FrmAnalizador extends JFrame {
 
     private void Boton_IntermedioActionPerformed(java.awt.event.ActionEvent evt) {
         try {
+            Boton_Assembler.setEnabled(true);
             String[] intermedio = {"intermedio.bat"};
             Runtime.getRuntime().exec(intermedio);
             System.out.println("Ejecucion del convertidor de código fuente a código intermedio");
-            Boton_Assembler.setEnabled(true);
+            
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -628,10 +652,11 @@ public class FrmAnalizador extends JFrame {
 
     private void Boton_AssemblerActionPerformed(java.awt.event.ActionEvent evt) {
         try {
+            Boton_Objeto.setEnabled(true);
             String[] gassembler = {"ensamblador.bat"};
             Runtime.getRuntime().exec(gassembler);
             System.out.println("Ejecucion del convertidor de código intermedio a assembler");
-            Boton_Objeto.setEnabled(true);
+            
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -680,6 +705,7 @@ public class FrmAnalizador extends JFrame {
             txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + ", Texto: \"" + sym.value + "\"");
             txtAnalizarSin.setForeground(Color.red);
         }
+        Boton_Intermedio.setEnabled(true);
     }//GEN-LAST:event_btnASintacticoActionPerformed
 
     private void btnBorrarSinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarSinActionPerformed
@@ -733,6 +759,7 @@ public class FrmAnalizador extends JFrame {
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnBorrarSin;
     private javax.swing.JButton Boton_Objeto;
+    private javax.swing.JButton Boton_Intermedio;
     private javax.swing.JButton Boton_Assembler;
     private javax.swing.JButton Boton_Ejecutar;
     private javax.swing.JButton Boton_Ejecutable;
