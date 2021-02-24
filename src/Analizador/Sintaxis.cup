@@ -1,3 +1,7 @@
+/*
+    Néstor David Bohorquez Galeano - 20172020083
+    Diego Alejandro Velez García -  20172020075
+*/
 package Analizador;
 
 import java_cup.runtime.Symbol;
@@ -16,16 +20,16 @@ parser code
 :};
 
 terminal Linea, Comillas, Back, Comilla_s, T_byte, T_int, T_char, T_long, T_float, T_double, Cadena, T_bool,
-    If, Else, Void, Switch, Case, Break, Default, Include, IOStream, Using, NameSpace, STD, Cin, Cout, RETURN,  
-    SYSTEM, Printf, Scanf, Do, While, For, Igual, Suma, Resta, Multiplicacion, Division, /*Op_logico, Op_relacional,*/ 
-    Op_Nand, Op_rel_mayor, Op_rel_menor, Op_rel_igual, Op_rel_diferente, Op_rel_mayor_igual,  
-    Op_rel_menor_igual, Op_rel_izq, Op_rel_der, /*Op_atribucion,*/ Op_atr_adicion, Op_atr_sustraccion, Op_atr_mult, 
-    Op_atr_div, Op_atr_resto, Op_incremento, Op_decremento, /*Op_booleano,*/ Op_bool_true, Op_bool_false, Parent_a, Parent_c,
-    Llave_a, Llave_c, Corchete_a, Corchete_c, Main, P_coma, Punto, Dos_puntos, Coma, Modulo, Identificador, Numero, ERROR;
+        If, Else, Void, Switch, Case, Break, Default, Include, IOStream, Using, NameSpace, STD, Cin, Cout, RETURN,  
+        SYSTEM, Printf, Scanf, Do, While, For, Igual, Suma, Resta, Multiplicacion, Division, /*Op_logico, Op_relacional,*/ 
+        Op_Nand, Op_rel_mayor, Op_rel_menor, Op_rel_igual, Op_rel_diferente, Op_rel_mayor_igual,  
+        Op_rel_menor_igual, Op_rel_izq, Op_rel_der, /*Op_atribucion,*/ Op_atr_adicion, Op_atr_sustraccion, Op_atr_mult, 
+        Op_atr_div, Op_atr_resto, Op_incremento, Op_decremento, /*Op_booleano,*/ Op_bool_true, Op_bool_false, Parent_a, Parent_c,
+        Llave_a, Llave_c, Corchete_a, Corchete_c, Main, P_coma, Punto, Dos_puntos, Coma, Modulo, Identificador, Numero, ERROR;
 
-non terminal INICIO, SENTENCIA, DECLARACION, DECLARACION_FOR, IF, IF_ELSE,
-    WHILE, DO_WHILE, FOR, SENTENCIA_BOOLEANA, SENTENCIA_FOR, PRINTF, SENTENCIA_PRINTF, SCANF, SENTENCIA_SCANF,
-    SWITCH, SENTENCIA_SWITCH, CIN, SENTENCIA_CIN, COUT, SENTENCIA_COUT;
+non terminal INICIO, SENTENCIA, DECLARACION, DECLARACION_FOR, IF, IF_ELSE,WHILE, DO_WHILE, FOR, 
+            SENTENCIA_BOOLEANA, SENTENCIA_FOR, PRINTF, SENTENCIA_PRINTF, SCANF, SENTENCIA_SCANF,
+            SWITCH, SENTENCIA_SWITCH, CIN, SENTENCIA_CIN, COUT, SENTENCIA_COUT;
 
 start with INICIO;
 
